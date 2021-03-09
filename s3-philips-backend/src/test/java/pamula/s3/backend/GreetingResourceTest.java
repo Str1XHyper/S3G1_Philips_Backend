@@ -1,4 +1,4 @@
-package pamula.s3.backend;
+package mercier.s3.backend;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
