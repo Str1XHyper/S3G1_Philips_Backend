@@ -3,6 +3,7 @@ package mercier.s3.backend.DAL;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Lesson extends PanacheEntityBase {
     private User Owner;
 
     @OneToMany
+    @JsonbTransient
     private List<Question> questions;
 
 
@@ -45,5 +47,17 @@ public class Lesson extends PanacheEntityBase {
     public boolean Save(){
         persist();
         return true;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public void addQuestion(Question question){
+        questions.add(question);
     }
 }
