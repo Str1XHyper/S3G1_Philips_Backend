@@ -22,7 +22,7 @@ public class LessonManager {
         lesson.setId(UUID.randomUUID().toString());
         lesson.setName(addLesson.getName());
         User user = userRepository.findById(addLesson.getOwnerID());
-        lesson.setOwner_of_Lesson(user);
+        lesson.setOwner(user);
         lessonRepository.persist(lesson);
         return lesson;
     }

@@ -4,44 +4,35 @@ import com.google.gson.JsonObject;
 import mercier.s3.backend.DAL.Lesson;
 import mercier.s3.backend.DAL.Question;
 import mercier.s3.backend.DAL.QuestionRepository;
-import mercier.s3.backend.DAL.QuestionTypes;
+import mercier.s3.backend.Models.Questions.AddQuestion;
+import mercier.s3.backend.Models.Questions.EditQuestion;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @ApplicationScoped
 public class QuestionManager {
     @Inject LessonManager lessonManager;
     @Inject QuestionRepository questionRepository;
-    private static Logger logger = Logger.getLogger(QuestionManager.class.getName());
 
-    public boolean CreateQuestion(JsonObject obj){
-        if(!obj.has("LessonID") || !obj.has("Question") || !obj.has("Type")){
-            logger.warning("LessonID, Question and Type are required fields");
-            return false;
-        }
+    public Question CreateQuestion(AddQuestion addQuestion){
 
         Question question = new Question();
-        question.setID(UUID.randomUUID().toString());
-        question.setQuestion(obj.get("Question").getAsString());
-        question.setType(QuestionTypes.valueOf(obj.get("Type").getAsString()));
+        question.setId(UUID.randomUUID().toString());
+        question.setQuestion(addQuestion.getQuestion());
+        question.setType(addQuestion.getType());
         question.persist();
-        lessonManager.AddQuestion(obj.get("LessonID").getAsString(),question);
-        return true;
+        lessonManager.AddQuestion(addQuestion.getLessonId(), question);
+        return question;
     }
 
-    public boolean EditQuestion(JsonObject obj){
-        if(!obj.has("QuestionID") || !obj.has("Question") || !obj.has("Type")){
-            logger.warning("QuestionID, Question and Type are required fields");
-            return false;
-        }
-        Question question = questionRepository.findById(obj.get("QuestionID").getAsString());
-        question.setQuestion(obj.get("Question").getAsString());
-        question.setType(QuestionTypes.valueOf(obj.get("Type").getAsString()));
-        question.persist();
-        return true;
+    public Question EditQuestion(EditQuestion editQuestion){
+        Question question = questionRepository.findById(editQuestion.getId());
+        question.setQuestion(editQuestion.getQuestion());
+        question.setType(editQuestion.getType());
+        question.Save();
+        return question;
     }
 
     public boolean DeleteQuestion(JsonObject obj) {

@@ -2,6 +2,7 @@ package mercier.s3.backend.DAL;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -10,41 +11,46 @@ import java.util.List;
 @Entity
 public class Question extends PanacheEntityBase {
 
-    @Id private String ID;
-    private String Question;
-    private QuestionTypes Type;
+    @Id private String id;
+    private String question;
+    private QuestionTypes type;
     @OneToMany
-    private List<Answer> Answers;
+    @JsonbTransient
+    private List<Answer> answers;
 
     public QuestionTypes getType() {
-        return Type;
+        return type;
     }
 
     public void setType(QuestionTypes type) {
-        this.Type = type;
+        this.type = type;
     }
 
     public String getQuestion() {
-        return Question;
+        return question;
     }
 
     public void setQuestion(String question) {
-        Question = question;
+        this.question = question;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String ID) {
+        this.id = ID;
     }
 
     public List<Answer> getAnswers() {
-        return Answers;
+        return answers;
     }
 
     public void setAnswers(List<Answer> answers) {
-        Answers = answers;
+        this.answers = answers;
+    }
+
+    public void Save() {
+        persist();
     }
 }

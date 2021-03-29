@@ -10,42 +10,41 @@ import javax.persistence.OneToOne;
 public class User extends PanacheEntityBase {
 
     @Id
-    private String ID;
-    private String Firstname;
-    private String Lastname;
+    private String id;
+    private String firstname;
+    private String lastname;
 
-    @OneToOne
-    private Roll roll;
+    private UserRoles role;
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String ID) {
+        this.id = ID;
     }
 
-    public Roll getRoll() {
-        return roll;
+    public UserRoles getRole() {
+        return role;
     }
 
-    public void setRoll(Roll roll) {
-        this.roll = roll;
+    public void setRole(UserRoles role) {
+        this.role = role;
     }
 
     public String getFirstname() {
-        return Firstname;
+        return firstname;
     }
 
     public void setFirstname(String firstname) {
-        Firstname = firstname;
+        this.firstname = firstname;
     }
 
     public String getLastname() {
-        return Lastname;
+        return lastname;
     }
 
     public void setLastname(String lastname) {
-        Lastname = lastname;
+        this.lastname = lastname;
     }
 }

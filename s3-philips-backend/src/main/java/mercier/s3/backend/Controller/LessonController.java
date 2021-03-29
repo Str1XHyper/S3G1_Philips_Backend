@@ -34,7 +34,7 @@ public class LessonController {
 
     @GET
     @Path("{Name}")
-    public Lesson GetAnime(@PathParam("Name") String name){
+    public Lesson GetLesson(@PathParam("Name") String name){
         return lessonManager.GetLessonByName(name);
     }
 
