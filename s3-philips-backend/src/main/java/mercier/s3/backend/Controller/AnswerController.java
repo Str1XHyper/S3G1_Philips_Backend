@@ -1,6 +1,6 @@
 package mercier.s3.backend.Controller;
 
-import mercier.s3.backend.DAL.Answer;
+import mercier.s3.backend.DAL.Answer.Answer;
 import mercier.s3.backend.Logic.QuestionManager;
 import mercier.s3.backend.Models.Answer.AddAnswer;
 

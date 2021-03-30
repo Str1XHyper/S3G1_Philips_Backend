@@ -1,4 +1,4 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Answer;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 

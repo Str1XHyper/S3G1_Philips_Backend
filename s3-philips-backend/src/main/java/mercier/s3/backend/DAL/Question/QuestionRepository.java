@@ -1,6 +1,5 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Question;
 
-import com.google.gson.JsonObject;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;

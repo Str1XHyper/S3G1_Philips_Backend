@@ -1,8 +1,6 @@
 package mercier.s3.backend.Controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.Lesson;
+import mercier.s3.backend.DAL.Lesson.Lesson;
 import mercier.s3.backend.Logic.LessonManager;
 import mercier.s3.backend.Models.Lessons.AddLesson;
 import mercier.s3.backend.Models.Lessons.DeleteLesson;
@@ -44,7 +42,7 @@ public class LessonController {
         return lessonManager.EditLessons(editLesson);
     }
 
-    @DELETE
+    @DELETE 
     @Path("/Delete")
     public String DeleteLesson(DeleteLesson deleteLesson){
         return String.valueOf(lessonManager.DeleteLesson(deleteLesson));

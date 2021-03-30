@@ -1,10 +1,15 @@
 package mercier.s3.backend.Logic;
 
 import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.*;
+import mercier.s3.backend.DAL.Answer.Answer;
+import mercier.s3.backend.DAL.Answer.AnswerRepository;
+import mercier.s3.backend.DAL.Lesson.Lesson;
+import mercier.s3.backend.DAL.Question.Question;
+import mercier.s3.backend.DAL.Question.QuestionRepository;
 import mercier.s3.backend.Models.Answer.AddAnswer;
 import mercier.s3.backend.Models.Answer.AnswerObject;
 import mercier.s3.backend.Models.Questions.AddQuestion;
+import mercier.s3.backend.Models.Questions.DeleteQuestion;
 import mercier.s3.backend.Models.Questions.EditQuestion;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,8 +19,10 @@ import java.util.*;
 @ApplicationScoped
 public class QuestionManager {
     @Inject LessonManager lessonManager;
-    @Inject QuestionRepository questionRepository;
-    @Inject AnswerRepository answerRepository;
+    @Inject
+    QuestionRepository questionRepository;
+    @Inject
+    AnswerRepository answerRepository;
 
     public Question CreateQuestion(AddQuestion addQuestion){
 
@@ -36,9 +43,9 @@ public class QuestionManager {
         return question;
     }
 
-    public boolean DeleteQuestion(JsonObject obj) {
-        Lesson lesson = lessonManager.GetLesson(obj.get("LessonID").getAsString());
-        Question question = questionRepository.findById(obj.get("QuestionID").getAsString());
+    public boolean DeleteQuestion(DeleteQuestion deleteQuestion) {
+        Lesson lesson = lessonManager.GetLesson(deleteQuestion.getLessonID());
+        Question question = questionRepository.findById(deleteQuestion.getLessonID());
         lesson.getQuestions().remove(question);
         question.delete();
         return false;

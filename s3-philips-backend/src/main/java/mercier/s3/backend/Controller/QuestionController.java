@@ -2,12 +2,13 @@ package mercier.s3.backend.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.Lesson;
-import mercier.s3.backend.DAL.Question;
-import mercier.s3.backend.DAL.QuestionTypes;
+import mercier.s3.backend.DAL.Lesson.Lesson;
+import mercier.s3.backend.DAL.Question.Question;
+import mercier.s3.backend.DAL.Question.QuestionTypes;
 import mercier.s3.backend.Logic.LessonManager;
 import mercier.s3.backend.Logic.QuestionManager;
 import mercier.s3.backend.Models.Questions.AddQuestion;
+import mercier.s3.backend.Models.Questions.DeleteQuestion;
 import mercier.s3.backend.Models.Questions.EditQuestion;
 
 import javax.inject.Inject;
@@ -15,7 +16,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Path("/Question")
 @Produces(MediaType.APPLICATION_JSON)
@@ -47,9 +47,8 @@ public class QuestionController {
 
     @DELETE
     @Path("/Delete")
-    public String DeleteQuestion(String data){
-        JsonObject obj = new Gson().fromJson(data, JsonObject.class);
-        boolean response = questionManager.DeleteQuestion(obj);
+    public String DeleteQuestion(DeleteQuestion deleteQuestion){
+        boolean response = questionManager.DeleteQuestion(deleteQuestion);
         return String.valueOf(response);
     }
     @GET

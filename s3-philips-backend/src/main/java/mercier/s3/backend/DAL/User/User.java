@@ -1,10 +1,9 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.User;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class User extends PanacheEntityBase {

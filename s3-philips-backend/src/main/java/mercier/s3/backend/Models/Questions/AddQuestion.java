@@ -1,6 +1,6 @@
 package mercier.s3.backend.Models.Questions;
 
-import mercier.s3.backend.DAL.QuestionTypes;
+import mercier.s3.backend.DAL.Question.QuestionTypes;
 
 public class AddQuestion {
 

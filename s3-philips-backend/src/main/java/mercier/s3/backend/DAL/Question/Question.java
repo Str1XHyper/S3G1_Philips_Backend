@@ -1,6 +1,7 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Question;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import mercier.s3.backend.DAL.Answer.Answer;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;

@@ -1,7 +1,10 @@
 package mercier.s3.backend.Logic;
 
-import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.*;
+import mercier.s3.backend.DAL.Lesson.Lesson;
+import mercier.s3.backend.DAL.Lesson.LessonRepository;
+import mercier.s3.backend.DAL.Question.Question;
+import mercier.s3.backend.DAL.User.User;
+import mercier.s3.backend.DAL.User.UserRepository;
 import mercier.s3.backend.Models.Lessons.AddLesson;
 import mercier.s3.backend.Models.Lessons.DeleteLesson;
 import mercier.s3.backend.Models.Lessons.EditLesson;
@@ -14,8 +17,10 @@ import java.util.UUID;
 @ApplicationScoped
 public class LessonManager {
 
-    @Inject LessonRepository lessonRepository;
-    @Inject UserRepository userRepository;
+    @Inject
+    LessonRepository lessonRepository;
+    @Inject
+    UserRepository userRepository;
 
     public Lesson CreateLesson(AddLesson addLesson){
         Lesson lesson = new Lesson();
