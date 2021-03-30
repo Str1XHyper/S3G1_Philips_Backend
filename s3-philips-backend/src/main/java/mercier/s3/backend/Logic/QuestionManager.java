@@ -1,20 +1,21 @@
 package mercier.s3.backend.Logic;
 
 import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.Lesson;
-import mercier.s3.backend.DAL.Question;
-import mercier.s3.backend.DAL.QuestionRepository;
+import mercier.s3.backend.DAL.*;
+import mercier.s3.backend.Models.Answer.AddAnswer;
+import mercier.s3.backend.Models.Answer.AnswerObject;
 import mercier.s3.backend.Models.Questions.AddQuestion;
 import mercier.s3.backend.Models.Questions.EditQuestion;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.UUID;
+import java.util.*;
 
 @ApplicationScoped
 public class QuestionManager {
     @Inject LessonManager lessonManager;
     @Inject QuestionRepository questionRepository;
+    @Inject AnswerRepository answerRepository;
 
     public Question CreateQuestion(AddQuestion addQuestion){
 
@@ -41,5 +42,33 @@ public class QuestionManager {
         lesson.getQuestions().remove(question);
         question.delete();
         return false;
+    }
+
+    public boolean SetAnswers(AddAnswer addAnswer){
+        System.out.println(addAnswer.toString());
+        Question question = questionRepository.findById(addAnswer.getQuestionID());
+        List<Answer> answers = new ArrayList<>();
+
+        for(AnswerObject answerObject: addAnswer.getAnswers()){
+            Answer answer = answerRepository.findById(answerObject.getId());
+            if(answer != null){
+                answer.setAnswer(answerObject.getAnswer());
+                answer.setCorrect(answerObject.getCorrect());
+            } else {
+                answer = new Answer();
+                answer.setAnswer(answerObject.getAnswer());
+                answer.setCorrect(answerObject.getCorrect());
+                answer.setId(UUID.randomUUID().toString());
+            }
+            answerRepository.persist(answer);
+            answers.add(answer);
+        }
+        question.setAnswers(answers);
+        return true;
+    }
+
+    public List<Answer> getAnswers(String questionID) {
+        Question question = questionRepository.findById(questionID);
+        return question.getAnswers();
     }
 }
