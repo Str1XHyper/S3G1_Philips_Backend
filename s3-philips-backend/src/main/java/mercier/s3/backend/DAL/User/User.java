@@ -1,7 +1,10 @@
 package mercier.s3.backend.DAL.User;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.security.jpa.Password;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,6 +15,12 @@ public class User extends PanacheEntityBase {
     private String id;
     private String firstname;
     private String lastname;
+    @Column(unique = true, nullable = false)
+    private String username;
+    @Password
+    @JsonbTransient
+    @Column(nullable = false)
+    private String password;
 
     private UserRoles role;
 
@@ -45,5 +54,21 @@ public class User extends PanacheEntityBase {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

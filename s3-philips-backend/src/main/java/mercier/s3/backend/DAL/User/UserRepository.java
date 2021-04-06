@@ -9,9 +9,9 @@ public class UserRepository implements PanacheRepository<User> {
 
     public User findByName(String name)
     {
-        return find("Name", name).firstResult();
+        return find("username", name).firstResult();
     };
-    public User findById(String id) {return find("Id", id).firstResult();};
+    public User findById(String id) {return find("id", id).firstResult();};
 
     public void SaveUser(User user){
         persist(user);
