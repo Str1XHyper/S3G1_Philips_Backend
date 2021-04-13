@@ -3,6 +3,7 @@ package mercier.s3.backend.Logic;
 import mercier.s3.backend.DAL.Session.SessionRepository;
 import mercier.s3.backend.DAL.User.User;
 import mercier.s3.backend.DAL.User.UserRepository;
+import mercier.s3.backend.DAL.User.UserRoles;
 import mercier.s3.backend.Logic.jwt.Hasher;
 import mercier.s3.backend.Logic.jwt.JWTWrapper;
 import mercier.s3.backend.Models.Auth.LoginModel;
@@ -12,7 +13,9 @@ import mercier.s3.backend.Models.Auth.RegisterModel;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.NotFoundException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -31,6 +34,7 @@ public class AuthManager {
             user.setId(UUID.randomUUID().toString());
             user.setUsername(registerModel.getUsername());
             user.setPassword(hasher.EncryptPassword(registerModel.getPassword()));
+            user.setRole(UserRoles.Student);
             userRepository.persist(user);
             return user;
         } catch (PersistenceException ex){
@@ -41,8 +45,13 @@ public class AuthManager {
 
     public LoginResponse VerifyLogin(LoginModel loginModel) throws Exception{
         User user = userRepository.findByName(loginModel.getUsername());
-        boolean canLogin = hasher.ValidatePassword(loginModel.getPassword(), user.getPassword());
 
+        if(user == null) {
+            throw new NotFoundException("User not found");
+        }
+
+        boolean canLogin = hasher.ValidatePassword(loginModel.getPassword(), user.getPassword());
+        System.out.println(canLogin);
         if(canLogin){
             LoginResponse response = new LoginResponse();
             response.setUser(user);
@@ -55,7 +64,7 @@ public class AuthManager {
             }
             return response;
         }
-        throw new Exception("Password combination incorrect!");
+        throw new BadRequestException("Password combination incorrect!");
 
     }
 }

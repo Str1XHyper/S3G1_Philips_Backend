@@ -39,6 +39,14 @@ public class QuestionController {
         return lesson.getQuestions();
     }
 
+    @GET
+    @Path("/Planned/{LessonID}")
+    public List<Question> GetPlannedQuestion(@PathParam("LessonID") String LessonID)
+    {
+        Lesson lesson = lessonManager.GetPlannedLesson(LessonID);
+        return lesson.getQuestions();
+    }
+
     @PUT
     @Path("/Edit")
     public Question EditQuestion(EditQuestion editQuestion){

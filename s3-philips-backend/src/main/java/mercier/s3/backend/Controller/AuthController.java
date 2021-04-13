@@ -28,7 +28,9 @@ public class AuthController {
         try{
             return authManager.VerifyLogin(loginModel);
         } catch (Exception ex){
-            return null;
+            LoginResponse response = new LoginResponse();
+            response.setResponseCode(400);
+            return response;
         }
     }
 

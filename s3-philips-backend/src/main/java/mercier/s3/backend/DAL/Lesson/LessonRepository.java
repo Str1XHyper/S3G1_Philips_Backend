@@ -1,8 +1,10 @@
 package mercier.s3.backend.DAL.Lesson;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import mercier.s3.backend.DAL.Class.SchoolClass;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
 
 @ApplicationScoped
 public class LessonRepository implements PanacheRepository<Lesson> {
@@ -17,5 +19,13 @@ public class LessonRepository implements PanacheRepository<Lesson> {
 
     public void DeleteLesson(String Id){
         delete("Id", Id);
+    }
+
+    public List<Lesson> findByOwner(String ownerID) {
+        return list("owner_id", ownerID);
+    }
+
+    public List<Lesson> getPlannedByClasses(List<SchoolClass> classes) {
+        return list("Class_id in ?1", classes);
     }
 }

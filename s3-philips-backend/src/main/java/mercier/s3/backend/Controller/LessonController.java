@@ -29,9 +29,14 @@ public class LessonController {
     public List<Lesson> GetLessons(){
         return lessonManager.GetLessons();
     }
+    @GET
+    @Path("/GetByOwner/{OwnerID}")
+    public List<Lesson> GetLessons(@PathParam("OwnerID") String ownerID){
+        return lessonManager.GetLessonsByOwner(ownerID);
+    }
 
     @GET
-    @Path("{Name}")
+    @Path("/GetByName/{Name}")
     public Lesson GetLesson(@PathParam("Name") String name){
         return lessonManager.GetLessonByName(name);
     }
@@ -46,5 +51,11 @@ public class LessonController {
     @Path("/Delete")
     public String DeleteLesson(DeleteLesson deleteLesson){
         return String.valueOf(lessonManager.DeleteLesson(deleteLesson));
+    }
+
+    @GET
+    @Path("/GetPlanned/{UserID}")
+    public List<Lesson> GetPlannedLessons(@PathParam("UserID") String userID){
+        return lessonManager.GetPlanned(userID);
     }
 }

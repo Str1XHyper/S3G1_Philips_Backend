@@ -1,7 +1,9 @@
 package mercier.s3.backend.Logic;
 
+import mercier.s3.backend.DAL.Class.SchoolClass;
 import mercier.s3.backend.DAL.Lesson.Lesson;
 import mercier.s3.backend.DAL.Lesson.LessonRepository;
+import mercier.s3.backend.DAL.Lesson.PlannedLessonRepository;
 import mercier.s3.backend.DAL.Question.Question;
 import mercier.s3.backend.DAL.User.User;
 import mercier.s3.backend.DAL.User.UserRepository;
@@ -21,6 +23,8 @@ public class LessonManager {
     LessonRepository lessonRepository;
     @Inject
     UserRepository userRepository;
+    @Inject
+    PlannedLessonRepository plannedLessonRepository;
 
     public Lesson CreateLesson(AddLesson addLesson){
         Lesson lesson = new Lesson();
@@ -63,5 +67,21 @@ public class LessonManager {
     }
     public Lesson GetLessonByName(String Name) {
         return lessonRepository.findByName(Name);
+    }
+
+    public List<Lesson> GetLessonsByOwner(String ownerID) {
+        return lessonRepository.findByOwner(ownerID);
+    }
+
+    public List<Lesson> GetPlanned(String userID) {
+        List<SchoolClass> classes = userRepository.findById(userID).getClasses();
+        if(classes.isEmpty()){
+            return null;
+        }
+        return lessonRepository.getPlannedByClasses(classes);
+    }
+
+    public Lesson GetPlannedLesson(String plannedLessonID) {
+        return plannedLessonRepository.GetLessonFromPlanned(plannedLessonID);
     }
 }

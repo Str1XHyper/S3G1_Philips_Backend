@@ -2,11 +2,11 @@ package mercier.s3.backend.DAL.User;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.security.jpa.Password;
+import mercier.s3.backend.DAL.Class.SchoolClass;
 
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User extends PanacheEntityBase {
@@ -21,6 +21,13 @@ public class User extends PanacheEntityBase {
     @JsonbTransient
     @Column(nullable = false)
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "SchoolClass_User"
+    )
+    @JsonbTransient
+    private List<SchoolClass> classes;
 
     private UserRoles role;
 
@@ -70,5 +77,13 @@ public class User extends PanacheEntityBase {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<SchoolClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<SchoolClass> classes) {
+        this.classes = classes;
     }
 }
