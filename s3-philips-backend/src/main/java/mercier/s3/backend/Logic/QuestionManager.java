@@ -45,10 +45,11 @@ public class QuestionManager {
 
     public boolean DeleteQuestion(DeleteQuestion deleteQuestion) {
         Lesson lesson = lessonManager.GetLesson(deleteQuestion.getLessonID());
-        Question question = questionRepository.findById(deleteQuestion.getLessonID());
+
+        Question question = questionRepository.findById(deleteQuestion.getQuestionID());
         lesson.getQuestions().remove(question);
         question.delete();
-        return false;
+        return true;
     }
 
     public boolean SetAnswers(AddAnswer addAnswer){
