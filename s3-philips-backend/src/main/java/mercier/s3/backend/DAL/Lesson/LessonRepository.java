@@ -1,25 +1,31 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Lesson;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import mercier.s3.backend.Controller.LessonController;
+import mercier.s3.backend.DAL.Class.SchoolClass;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.logging.Logger;
+import java.util.List;
 
 @ApplicationScoped
 public class LessonRepository implements PanacheRepository<Lesson> {
-    private static Logger logger = Logger.getLogger(LessonRepository.class.getName());
 
     public Lesson findByName(String name)
     {
         return find("Name", name).firstResult();
     };
     public Lesson findById(String Id){
-        logger.info(Id);
         return find("Id", Id).firstResult();
     }
 
     public void DeleteLesson(String Id){
         delete("Id", Id);
+    }
+
+    public List<Lesson> findByOwner(String ownerID) {
+        return list("owner_id", ownerID);
+    }
+
+    public List<Lesson> getPlannedByClasses(List<SchoolClass> classes) {
+        return list("Class_id in ?1", classes);
     }
 }

@@ -1,7 +1,12 @@
 package mercier.s3.backend.Logic;
 
-import com.google.gson.JsonObject;
-import mercier.s3.backend.DAL.*;
+import mercier.s3.backend.DAL.Class.SchoolClass;
+import mercier.s3.backend.DAL.Lesson.Lesson;
+import mercier.s3.backend.DAL.Lesson.LessonRepository;
+import mercier.s3.backend.DAL.Lesson.PlannedLessonRepository;
+import mercier.s3.backend.DAL.Question.Question;
+import mercier.s3.backend.DAL.User.User;
+import mercier.s3.backend.DAL.User.UserRepository;
 import mercier.s3.backend.Models.Lessons.AddLesson;
 import mercier.s3.backend.Models.Lessons.DeleteLesson;
 import mercier.s3.backend.Models.Lessons.EditLesson;
@@ -14,15 +19,19 @@ import java.util.UUID;
 @ApplicationScoped
 public class LessonManager {
 
-    @Inject LessonRepository lessonRepository;
-    @Inject UserRepository userRepository;
+    @Inject
+    LessonRepository lessonRepository;
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    PlannedLessonRepository plannedLessonRepository;
 
     public Lesson CreateLesson(AddLesson addLesson){
         Lesson lesson = new Lesson();
         lesson.setId(UUID.randomUUID().toString());
         lesson.setName(addLesson.getName());
         User user = userRepository.findById(addLesson.getOwnerID());
-        lesson.setOwner_of_Lesson(user);
+        lesson.setOwner(user);
         lessonRepository.persist(lesson);
         return lesson;
     }
@@ -58,5 +67,21 @@ public class LessonManager {
     }
     public Lesson GetLessonByName(String Name) {
         return lessonRepository.findByName(Name);
+    }
+
+    public List<Lesson> GetLessonsByOwner(String ownerID) {
+        return lessonRepository.findByOwner(ownerID);
+    }
+
+    public List<Lesson> GetPlanned(String userID) {
+        List<SchoolClass> classes = userRepository.findById(userID).getClasses();
+        if(classes.isEmpty()){
+            return null;
+        }
+        return lessonRepository.getPlannedByClasses(classes);
+    }
+
+    public Lesson GetPlannedLesson(String plannedLessonID) {
+        return plannedLessonRepository.GetLessonFromPlanned(plannedLessonID);
     }
 }

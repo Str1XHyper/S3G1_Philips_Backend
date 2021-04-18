@@ -1,4 +1,4 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Answer;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -10,8 +10,8 @@ public class Answer extends PanacheEntityBase {
 
     @Id
     private String id;
-    private String Answer;
-    private boolean IsCorrect;
+    private String answer;
+    private boolean correct;
 
     public void setId(String id) {
         this.id = id;
@@ -22,18 +22,18 @@ public class Answer extends PanacheEntityBase {
     }
 
     public boolean isCorrect() {
-        return IsCorrect;
+        return correct;
     }
 
     public void setCorrect(boolean correct) {
-        IsCorrect = correct;
+        this.correct = correct;
     }
 
     public String getAnswer() {
-        return Answer;
+        return answer;
     }
 
     public void setAnswer(String answer) {
-        Answer = answer;
+        this.answer = answer;
     }
 }

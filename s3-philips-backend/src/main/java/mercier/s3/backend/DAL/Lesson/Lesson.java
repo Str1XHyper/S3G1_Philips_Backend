@@ -1,7 +1,9 @@
-package mercier.s3.backend.DAL;
+package mercier.s3.backend.DAL.Lesson;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import mercier.s3.backend.DAL.Question.Question;
+import mercier.s3.backend.DAL.User.User;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
@@ -11,42 +13,41 @@ import java.util.List;
 public class Lesson extends PanacheEntityBase {
 
     @Id
-    private String Id;
-    private String Name;
+    private String id;
+    private String name;
 
     @OneToOne
-    private User Owner;
+    private User owner;
 
-    @OneToMany
+    @ManyToMany
     @JsonbTransient
     private List<Question> questions;
 
 
     public String getId() {
-        return this.Id;
+        return this.id;
     }
     public void setId(String Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
-    public User getOwner_of_Lesson() {
-        return this.Owner;
+    public User getOwner() {
+        return this.owner;
     }
-    public void setOwner_of_Lesson(User Owner) {
-        this.Owner = Owner;
+    public void setOwner(User Owner) {
+        this.owner = Owner;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public boolean Save(){
+    public void Save(){
         persist();
-        return true;
     }
 
     public List<Question> getQuestions() {

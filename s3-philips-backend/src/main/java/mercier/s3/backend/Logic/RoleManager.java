@@ -1,4 +1,4 @@
 package mercier.s3.backend.Logic;
 
-public class RollManager {
+public class RoleManager {
 }
