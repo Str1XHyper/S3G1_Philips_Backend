@@ -86,7 +86,10 @@
       <artifactId>jose4j</artifactId>
       <version>0.7.2</version>
     </dependency>
-
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-docker</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
