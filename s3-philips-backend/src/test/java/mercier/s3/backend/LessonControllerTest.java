@@ -178,7 +178,7 @@ public class LessonControllerTest
     }
 
     @Test
-    public void GetLessonByNameRepo() {
+    public void GetLessonByName() {
         //Arrange
         String lessonName = "Add";
         Lesson expectedLesson = new Lesson();
@@ -193,4 +193,24 @@ public class LessonControllerTest
                 "found lessons are: " +
                 expectedLesson + " And " + actualLesson);
     }
+
+    @Test
+    public void GetLessonByOwnerID() {
+        //Arrange
+        String ownerId = "78886e2c-80ac-403b-80a0-e9224add01bb";
+        List<Lesson> expectedLessonList = makeLessonList();
+        List<Lesson> actualLessonList;
+
+        Mockito.when(lessonCon.GetLessons(ownerId)).thenReturn(expectedLessonList);
+
+        //Act
+        actualLessonList = lessonController.GetLessons(ownerId);
+
+        //Assert
+        Assertions.assertEquals(expectedLessonList, actualLessonList, "Lesson list does not match " +
+                "found lessons are: " +
+                expectedLessonList + " And " + actualLessonList);
+    }
+
+
 }
