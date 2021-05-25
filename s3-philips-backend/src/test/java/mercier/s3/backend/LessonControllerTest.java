@@ -19,10 +19,7 @@ import javax.json.Json;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 @QuarkusTest
 public class LessonControllerTest
@@ -31,133 +28,7 @@ public class LessonControllerTest
     @InjectMock LessonController lessonCon;
 
     private List<Lesson> makeLessonList() {
-        List<Lesson> lessons = new List<Lesson>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Lesson> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Lesson lesson) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Lesson> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, Collection<? extends Lesson> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public boolean equals(Object o) {
-                return false;
-            }
-
-            @Override
-            public int hashCode() {
-                return 0;
-            }
-
-            @Override
-            public Lesson get(int index) {
-                return null;
-            }
-
-            @Override
-            public Lesson set(int index, Lesson element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, Lesson element) {
-
-            }
-
-            @Override
-            public Lesson remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public ListIterator<Lesson> listIterator() {
-                return null;
-            }
-
-            @Override
-            public ListIterator<Lesson> listIterator(int index) {
-                return null;
-            }
-
-            @Override
-            public List<Lesson> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-        };
-        return lessons;
+        return new ArrayList<Lesson>();
     }
 
     @Test

@@ -4,6 +4,8 @@ import mercier.s3.backend.DAL.Answer.Answer;
 import mercier.s3.backend.Logic.QuestionManager;
 import mercier.s3.backend.Models.Answer.AddAnswer;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
