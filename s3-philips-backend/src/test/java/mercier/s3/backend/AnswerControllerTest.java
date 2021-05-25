@@ -30,14 +30,10 @@ public class AnswerControllerTest {
     @InjectMock AnswerController answerControllerMock;
 
 
-    private List<Answer> MakeAnswerList() {
-        return new ArrayList<Answer>();
-    }
-
     @Test
     public void GetAnswersFromAQuestion() {
         //Arrange
-        List<Answer> expectedAnswerList = MakeAnswerList();
+        List<Answer> expectedAnswerList = new ArrayList<>();
         List<Answer> actualAnswerList;
         String questionId = "1";
 

@@ -27,18 +27,11 @@ public class ClassControllerTest {
     @Inject ClassController classController;
     @InjectMock ClassController classCon;
 
-    private List<SchoolClass> makeClassesList() {
-        return new ArrayList<SchoolClass>();
-    }
-
-    private List<User> makeUserList() {
-        return new ArrayList<User>();
-    }
 
     @Test
     public void GetAllClasses() {
         //Arrange
-        List<SchoolClass> schoolClassesListExpected = makeClassesList();
+        List<SchoolClass> schoolClassesListExpected = new ArrayList<>();
         List<SchoolClass> schoolClassListActual;
 
         Mockito.when(classCon.GetClasses()).thenReturn(schoolClassesListExpected);
@@ -55,7 +48,7 @@ public class ClassControllerTest {
     @Test
     public void GetAllStudentsForAClass() {
         //Arrange
-        List<User> expectedUserList = makeUserList();
+        List<User> expectedUserList = new ArrayList<>();
         List<User> actualUserList;
         String classID = "1";
 

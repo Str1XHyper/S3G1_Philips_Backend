@@ -35,15 +35,10 @@ public class QuestionControllerTest {
 
     @Inject QuestionController questionController;
     @InjectMock QuestionController questionControllerMock;
-
-    private ArrayList<Question> makeQuestionsList() {
-        return new ArrayList<>();
-    }
-
     @Test
     public void GetAllQuestionsFromOneLesson() {
         //Arrange
-        List<Question> expectedQuestionList = makeQuestionsList();
+        List<Question> expectedQuestionList = new ArrayList<>();
         List<Question> actualQuestionList;
         String lessonID = "1";
 
@@ -61,7 +56,7 @@ public class QuestionControllerTest {
     @Test
     public void GetPlannedQuestion() {
         //Arrange
-        List<Question> expectedQuestionList = makeQuestionsList();
+        List<Question> expectedQuestionList = new ArrayList<>();
         List<Question> actualQuestionList;
         String lessonID = "1";
 

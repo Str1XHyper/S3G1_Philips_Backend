@@ -27,14 +27,10 @@ public class LessonControllerTest
     @Inject LessonController lessonController;
     @InjectMock LessonController lessonCon;
 
-    private List<Lesson> makeLessonList() {
-        return new ArrayList<Lesson>();
-    }
-
     @Test
     public void GetAllLessons() {
         //Arrange
-        List<Lesson> lessonListExpected = makeLessonList();
+        List<Lesson> lessonListExpected =  new ArrayList<>();
         List<Lesson> lessonListActual;
 
         Mockito.when(lessonCon.GetLessons()).thenReturn(lessonListExpected);
@@ -69,7 +65,7 @@ public class LessonControllerTest
     public void GetLessonByOwnerID() {
         //Arrange
         String ownerId = "78886e2c-80ac-403b-80a0-e9224add01bb";
-        List<Lesson> expectedLessonList = makeLessonList();
+        List<Lesson> expectedLessonList = new ArrayList<>();
         List<Lesson> actualLessonList;
 
         Mockito.when(lessonCon.GetLessons(ownerId)).thenReturn(expectedLessonList);
