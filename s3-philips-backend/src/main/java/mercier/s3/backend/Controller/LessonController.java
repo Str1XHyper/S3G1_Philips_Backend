@@ -1,6 +1,7 @@
 package mercier.s3.backend.Controller;
 
 import mercier.s3.backend.DAL.Lesson.Lesson;
+import mercier.s3.backend.DAL.Lesson.PlannedLesson;
 import mercier.s3.backend.Logic.LessonManager;
 import mercier.s3.backend.Models.Lessons.AddLesson;
 import mercier.s3.backend.Models.Lessons.DeleteLesson;
@@ -55,7 +56,7 @@ public class LessonController {
 
     @GET
     @Path("/GetPlanned/{UserID}")
-    public List<Lesson> GetPlannedLessons(@PathParam("UserID") String userID){
+    public List<PlannedLesson> GetPlannedLessons(@PathParam("UserID") String userID){
         return lessonManager.GetPlanned(userID);
     }
 }

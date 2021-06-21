@@ -24,8 +24,4 @@ public class LessonRepository implements PanacheRepository<Lesson> {
     public List<Lesson> findByOwner(String ownerID) {
         return list("owner_id", ownerID);
     }
-
-    public List<Lesson> getPlannedByClasses(List<SchoolClass> classes) {
-        return list("Class_id in ?1", classes);
-    }
 }
