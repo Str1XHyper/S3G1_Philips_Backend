@@ -34,7 +34,7 @@ public class AuthManager {
             user.setId(UUID.randomUUID().toString());
             user.setUsername(registerModel.getUsername());
             user.setPassword(hasher.EncryptPassword(registerModel.getPassword()));
-            user.setRole(UserRoles.Student);
+            user.setRole(UserRoles.STUDENT);
             userRepository.persist(user);
             return user;
         } catch (PersistenceException ex){
